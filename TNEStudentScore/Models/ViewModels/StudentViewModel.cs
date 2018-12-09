@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TNEStudentScoreModels
+namespace TNEStudentScore.Models.ViewModels
 {
-    public class Student
+    public class StudentViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public DateTime BornDate { get; set; }
         public int GroupId { get; set; }
-
-        public virtual Group Group { get; set; }
-        public virtual List<Mark> Marks { get; set; }
+        
+        public string GroupName { get; set; }
+        public string UniversityName { get; set; }
+        public double AvgScore { get; set; }
     }
 }

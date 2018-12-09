@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TNEStudentScoreModels;
+using TNEStudentScore.Models.ViewModels;
 
 namespace TNEStudentScore.Models
 {
@@ -63,15 +64,15 @@ namespace TNEStudentScore.Models
             );
             // Seed Student score
             modelBuilder.Entity<Mark>().HasData(
-                new Mark { Id = 1, SubjectId = 1, StudentId = 1, Score = 3 },
-                new Mark { Id = 2, SubjectId = 2, StudentId = 1, Score = 4 },
-                new Mark { Id = 3, SubjectId = 3, StudentId = 1, Score = 5 },
-                new Mark { Id = 4, SubjectId = 1, StudentId = 2, Score = 4 },
-                new Mark { Id = 5, SubjectId = 2, StudentId = 2, Score = 3 },
-                new Mark { Id = 6, SubjectId = 3, StudentId = 2, Score = 2 },
-                new Mark { Id = 7, SubjectId = 1, StudentId = 3, Score = 4 },
-                new Mark { Id = 8, SubjectId = 2, StudentId = 3, Score = 5 },
-                new Mark { Id = 9, SubjectId = 3, StudentId = 4, Score = 5 }
+                new Mark { Id = 1, SubjectId = 1, StudentId = 1, Score = 3, ExamDate = new DateTime(2018, 01, 24) },
+                new Mark { Id = 2, SubjectId = 2, StudentId = 1, Score = 4, ExamDate = new DateTime(2018, 02, 24) },
+                new Mark { Id = 3, SubjectId = 3, StudentId = 1, Score = 5, ExamDate = new DateTime(2018, 03, 24) },
+                new Mark { Id = 4, SubjectId = 1, StudentId = 2, Score = 4, ExamDate = new DateTime(2017, 04, 24) },
+                new Mark { Id = 5, SubjectId = 2, StudentId = 2, Score = 3, ExamDate = new DateTime(2016, 05, 24) },
+                new Mark { Id = 6, SubjectId = 3, StudentId = 2, Score = 2, ExamDate = new DateTime(2017, 04, 24) },
+                new Mark { Id = 7, SubjectId = 1, StudentId = 3, Score = 4, ExamDate = new DateTime(2016, 03, 24) },
+                new Mark { Id = 8, SubjectId = 2, StudentId = 3, Score = 5, ExamDate = new DateTime(2016, 02, 24) },
+                new Mark { Id = 9, SubjectId = 3, StudentId = 4, Score = 5, ExamDate = new DateTime(2018, 01, 24) }
             );
             #endregion
         }

@@ -10,7 +10,7 @@ using TNEStudentScore.Models;
 namespace TNEStudentScore.Migrations
 {
     [DbContext(typeof(StudentScoreContext))]
-    [Migration("20181209104110_Initial")]
+    [Migration("20181209110649_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -64,6 +64,8 @@ namespace TNEStudentScore.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("ExamDate");
+
                     b.Property<int>("Score");
 
                     b.Property<int>("StudentId");
@@ -82,6 +84,7 @@ namespace TNEStudentScore.Migrations
                         new
                         {
                             Id = 1,
+                            ExamDate = new DateTime(2018, 1, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Score = 3,
                             StudentId = 1,
                             SubjectId = 1
@@ -89,6 +92,7 @@ namespace TNEStudentScore.Migrations
                         new
                         {
                             Id = 2,
+                            ExamDate = new DateTime(2018, 2, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Score = 4,
                             StudentId = 1,
                             SubjectId = 2
@@ -96,6 +100,7 @@ namespace TNEStudentScore.Migrations
                         new
                         {
                             Id = 3,
+                            ExamDate = new DateTime(2018, 3, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Score = 5,
                             StudentId = 1,
                             SubjectId = 3
@@ -103,6 +108,7 @@ namespace TNEStudentScore.Migrations
                         new
                         {
                             Id = 4,
+                            ExamDate = new DateTime(2017, 4, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Score = 4,
                             StudentId = 2,
                             SubjectId = 1
@@ -110,6 +116,7 @@ namespace TNEStudentScore.Migrations
                         new
                         {
                             Id = 5,
+                            ExamDate = new DateTime(2016, 5, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Score = 3,
                             StudentId = 2,
                             SubjectId = 2
@@ -117,6 +124,7 @@ namespace TNEStudentScore.Migrations
                         new
                         {
                             Id = 6,
+                            ExamDate = new DateTime(2017, 4, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Score = 2,
                             StudentId = 2,
                             SubjectId = 3
@@ -124,6 +132,7 @@ namespace TNEStudentScore.Migrations
                         new
                         {
                             Id = 7,
+                            ExamDate = new DateTime(2016, 3, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Score = 4,
                             StudentId = 3,
                             SubjectId = 1
@@ -131,6 +140,7 @@ namespace TNEStudentScore.Migrations
                         new
                         {
                             Id = 8,
+                            ExamDate = new DateTime(2016, 2, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Score = 5,
                             StudentId = 3,
                             SubjectId = 2
@@ -138,6 +148,7 @@ namespace TNEStudentScore.Migrations
                         new
                         {
                             Id = 9,
+                            ExamDate = new DateTime(2018, 1, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Score = 5,
                             StudentId = 4,
                             SubjectId = 3

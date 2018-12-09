@@ -122,7 +122,8 @@ namespace TNEStudentScore.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     StudentId = table.Column<int>(nullable: false),
                     SubjectId = table.Column<int>(nullable: false),
-                    Score = table.Column<int>(nullable: false)
+                    Score = table.Column<int>(nullable: false),
+                    ExamDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -205,18 +206,18 @@ namespace TNEStudentScore.Migrations
 
             migrationBuilder.InsertData(
                 table: "Marks",
-                columns: new[] { "Id", "Score", "StudentId", "SubjectId" },
+                columns: new[] { "Id", "ExamDate", "Score", "StudentId", "SubjectId" },
                 values: new object[,]
                 {
-                    { 1, 3, 1, 1 },
-                    { 2, 4, 1, 2 },
-                    { 3, 5, 1, 3 },
-                    { 9, 5, 4, 3 },
-                    { 7, 4, 3, 1 },
-                    { 8, 5, 3, 2 },
-                    { 4, 4, 2, 1 },
-                    { 5, 3, 2, 2 },
-                    { 6, 2, 2, 3 }
+                    { 1, new DateTime(2018, 1, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 1, 1 },
+                    { 2, new DateTime(2018, 2, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, 1, 2 },
+                    { 3, new DateTime(2018, 3, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, 1, 3 },
+                    { 9, new DateTime(2018, 1, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, 4, 3 },
+                    { 7, new DateTime(2016, 3, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, 3, 1 },
+                    { 8, new DateTime(2016, 2, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, 3, 2 },
+                    { 4, new DateTime(2017, 4, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, 2, 1 },
+                    { 5, new DateTime(2016, 5, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 2, 2 },
+                    { 6, new DateTime(2017, 4, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 2, 3 }
                 });
 
             migrationBuilder.CreateIndex(
