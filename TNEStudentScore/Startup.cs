@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using TNEStudentScore.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace TNEStudentScore
 {
@@ -24,7 +26,9 @@ namespace TNEStudentScore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc();
+            services.AddDbContext<StudentScoreContext>(opt =>
+                opt.UseSqlServer(Configuration.GetConnectionString("StudentScoreDB")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
