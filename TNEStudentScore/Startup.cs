@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using NSwag.AspNetCore;
+using System.Linq;
 using TNEStudentScore.Models;
-using Microsoft.EntityFrameworkCore;
-using AutoMapper;
 using TNEStudentScoreModels;
 using TNEStudentScoreModels.ViewModels;
 
@@ -29,7 +24,8 @@ namespace TNEStudentScore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            Mapper.Initialize(cfg => {
+            Mapper.Initialize(cfg =>
+            {
                 cfg.CreateMap<Student, StudentViewModel>()
                     .ForMember(d => d.GroupName, opt => opt.MapFrom(s => s.Group.Name))
                     .ForMember(d => d.UniversityName, opt => opt.MapFrom(s => s.Group.University.Name))
@@ -42,6 +38,8 @@ namespace TNEStudentScore
             services.AddDbContext<StudentScoreContext>(opt =>
                 opt.UseSqlServer(Configuration.GetConnectionString("StudentScoreDB")));
             services.AddAutoMapper();
+            services.AddSwaggerDocument();
+            //services.AddSwaggerGen();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +50,8 @@ namespace TNEStudentScore
                 app.UseDeveloperExceptionPage();
             }
             app.UseMvc();
+            app.UseSwagger(t=> t.DocumentName = "asa");
+            app.UseSwaggerUi3();
 
         }
     }
