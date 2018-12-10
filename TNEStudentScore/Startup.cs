@@ -34,6 +34,8 @@ namespace TNEStudentScore
                     .ForMember(d => d.GroupName, opt => opt.MapFrom(s => s.Group.Name))
                     .ForMember(d => d.UniversityName, opt => opt.MapFrom(s => s.Group.University.Name))
                     .ForMember(d => d.AvgScore, opt => opt.MapFrom(s => s.Marks.Average(t => t.Score)));
+                cfg.CreateMap<IGrouping<Student, Mark>, StudentViewModel>()
+                    .ForMember(d => d.AvgScore, opt => opt.MapFrom(s => s.Average(z => z.Score)));
             });
 
             services.AddMvc();
