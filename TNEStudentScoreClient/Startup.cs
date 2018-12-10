@@ -4,18 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using TNEStudentScore.Models;
-using Microsoft.EntityFrameworkCore;
-using AutoMapper;
-using TNEStudentScoreModels;
-using TNEStudentScoreModels.ViewModels;
+using TNEStudentScoreClient.Models;
 
-namespace TNEStudentScore
+namespace TNEStudentScoreClient
 {
     public class Startup
     {
@@ -29,19 +25,16 @@ namespace TNEStudentScore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            Mapper.Initialize(cfg => {
-                cfg.CreateMap<Student, StudentViewModel>()
-                    .ForMember(d => d.GroupName, opt => opt.MapFrom(s => s.Group.Name))
-                    .ForMember(d => d.UniversityName, opt => opt.MapFrom(s => s.Group.University.Name))
-                    .ForMember(d => d.AvgScore, opt => opt.MapFrom(s => s.Marks.Average(t => t.Score)));
-                cfg.CreateMap<IGrouping<Student, Mark>, StudentViewModel>()
-                    .ForMember(d => d.AvgScore, opt => opt.MapFrom(s => s.Average(z => z.Score)));
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
-            services.AddMvc();
             services.AddDbContext<StudentScoreContext>(opt =>
-                opt.UseSqlServer(Configuration.GetConnectionString("StudentScoreDB")));
-            services.AddAutoMapper();
+              opt.UseSqlServer(Configuration.GetConnectionString("StudentScoreDB")));
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,8 +44,20 @@ namespace TNEStudentScore
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseMvc();
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+            }
 
+            app.UseStaticFiles();
+            app.UseCookiePolicy();
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            });
         }
     }
 }

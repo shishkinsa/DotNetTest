@@ -6,9 +6,9 @@ using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TNEStudentScore.Models;
-using TNEStudentScore.Models.ViewModels;
 using TNEStudentScoreModels;
 using Microsoft.EntityFrameworkCore;
+using TNEStudentScoreModels.ViewModels;
 
 namespace TNEStudentScore.Controllers
 {
