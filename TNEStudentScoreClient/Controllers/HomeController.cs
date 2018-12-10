@@ -15,26 +15,28 @@ namespace TNEStudentScoreClient.Controllers
     public class HomeController : Controller
     {
         IConfiguration _config;
-
+        string apiEndpoint = "";
         public HomeController(IConfiguration iConfig)
         {
             _config = iConfig;
+            apiEndpoint = _config.GetSection("ApiEndpoint").Value;
         }
         public IActionResult Index()
         {
+            ViewBag.SwaggerURL = String.Format("{0}/swagger", apiEndpoint);
+
             return View();
         }
 
         public async Task<ActionResult> LoadStudentsMVC(int year = 2018, int avg = 3)
         {
             List<StudentViewModel> listStudents = new List<StudentViewModel>();
-            using (HttpClient client = new HttpClient())
-            {
-                var apiEndpoint = _config.GetSection("ApiEndpoint").Value;
-                var apiModel = "StudentScores";
-                var queryUrl = String.Format("{0}/{1}?year={2}&avg={3}", apiEndpoint, apiModel, year, avg);
-               
+            var apiEndpoint = _config.GetSection("ApiEndpoint").Value;
+            var apiModel = "api/StudentScores";
+            var queryUrl = String.Format("{0}/{1}?year={2}&avg={3}", apiEndpoint, apiModel, year, avg);
 
+            using (HttpClient client = new HttpClient())
+            { 
                 try
                 {
                     HttpResponseMessage response = await client.GetAsync(queryUrl);
@@ -47,7 +49,7 @@ namespace TNEStudentScoreClient.Controllers
                     // Log exception...
                 }
             }
-
+            ViewBag.SwaggerURL = String.Format("{0}/swagger", apiEndpoint);
             return View(listStudents);
         }
 

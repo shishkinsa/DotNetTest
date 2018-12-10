@@ -29,6 +29,10 @@ namespace TNEStudentScore.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<StudentViewModel>> Get(int year, double avg = 4.5)
         {
+            if (year == 0)
+            {
+                return BadRequest();
+            }
             var studentMarks = _context.Marks
                 .Include(t=>t.Student)
                     .ThenInclude(t=>t.Group)

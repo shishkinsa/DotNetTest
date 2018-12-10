@@ -50,7 +50,7 @@ namespace TNEStudentScore
                 app.UseDeveloperExceptionPage();
             }
             app.UseMvc();
-            app.UseSwagger(t=> t.DocumentName = "asa");
+            app.UseSwagger(t=> t.DocumentName = "ApiDoc");
             app.UseSwaggerUi3();
 
         }
